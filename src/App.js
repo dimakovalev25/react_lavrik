@@ -1,54 +1,61 @@
 import './App.css';
+import Counter from "./components/Counter";
 import {useState} from "react";
-import PropTypes from 'prop-types';
 
+function App() {
 
-function App({min = 1, max = 5}) {
-    let [current, setCurrent] = useState(min);
-    // console.log(typeof(current))
-
-    function applyCurrent(num) {
-        let validCurrent = Math.max(min, Math.min(max, num));
-        setCurrent(validCurrent);
-    }
-
-    let inc = () => applyCurrent(current + 1);
-    let dec = () => applyCurrent(current - 1);
-
-
-    function changeCurrent (e) {
-        // setCurrent(Number(e.target.value))
-        let num = parseInt(e.target.value);
-        applyCurrent(isNaN(num) ? min : num)
-    }
-
+    let [maxTest, setMaxTest] = useState(7);
+    console.log(maxTest)
+    let setMaxTest5 = () => setMaxTest(5);
 
     return (
         <div className="App">
-            <span>{current}</span> <br/>
-            {typeof current}
-            <input
-                value={current}
-                onChange={changeCurrent}
-                type="text"/>
-            <button
-                onClick={inc}
-                type={'button'}>inc
-            </button>
 
-            <button
-                onClick={dec}
-                type={'button'}>dec
-            </button>
+            <Counter max={6} min={1}/>
+            <hr/>
 
+
+            <Counter max={maxTest} min={0} key={`1${maxTest}`}/>
+            <button
+                type={"button"}
+                onClick={setMaxTest5}
+            >set 5
+            </button>
 
         </div>
-    );
+    )
 }
 
-App.propTypes = {
-    min: PropTypes.number,
-    max: PropTypes.number.isRequired,
+
+function productStub() {
+    return [
+        {
+            id: 100,
+            title: 'Iphone X',
+            price: 1200
+        },
+        {
+            id: 101,
+            title: 'Iphone 11',
+            price: 1000
+        },
+        {
+            id: 102,
+            title: 'Iphone 12',
+            price: 1200
+        },
+        {
+            id: 103,
+            title: 'Iphone 13',
+            price: 1270
+        },
+        {
+            id: 104,
+            title: 'Iphone 13 MAX',
+            price: 1500
+        },
+    ]
+
 }
 
 export default App;
