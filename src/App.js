@@ -1,25 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import PropTypes from 'prop-types';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+function App({min = 1, max = 5}) {
+    let [current, setCurrent] = useState(min);
+    // console.log(typeof(current))
+
+    function applyCurrent(num) {
+        let validCurrent = Math.max(min, Math.min(max, num));
+        setCurrent(validCurrent);
+    }
+
+    let inc = () => applyCurrent(current + 1);
+    let dec = () => applyCurrent(current - 1);
+
+
+    function changeCurrent (e) {
+        // setCurrent(Number(e.target.value))
+        let num = parseInt(e.target.value);
+        applyCurrent(isNaN(num) ? min : num)
+    }
+
+
+    return (
+        <div className="App">
+            <span>{current}</span> <br/>
+            {typeof current}
+            <input
+                value={current}
+                onChange={changeCurrent}
+                type="text"/>
+            <button
+                onClick={inc}
+                type={'button'}>inc
+            </button>
+
+            <button
+                onClick={dec}
+                type={'button'}>dec
+            </button>
+
+
+        </div>
+    );
+}
+
+App.propTypes = {
+    min: PropTypes.number,
+    max: PropTypes.number.isRequired,
 }
 
 export default App;
