@@ -6,19 +6,23 @@ import MinMax from "./components/MinMax";
 function App() {
 
     let [products, setProducts] = useState(productsStub());
+    let [total, setTotal] = useState(0);
+    console.log(total)
+
+    let total = products.reduce((sum, pr) => sum + pr.price * pr.cnt, 0)
+
+    let finalSum = () => {
+        setTotal(products.map(item => item.cnt * item.price).reduce(
+            (a, b) => a + b, 0))
+    }
 
     let setCnt = (id, cnt) => {
         setProducts(products.map(pr => pr.id != id ? pr : ({...pr, cnt})));
     }
 
     let delProduct = (id) => {
-        setProducts(products.filter(item => item.id !== id))
+        setProducts(products.filter(item => item.id !== id));
     }
-
-    let totalItem = (cnt, price) => {
-        console.log(cnt * price);
-    }
-
 
     return (
         <div className="App">
@@ -54,10 +58,6 @@ function App() {
                             </button>
                         </td>
                         <td>
-                            {/*<button*/}
-                            {/*    onClick={cnt => totalItem(pr.cnt, pr.price)}*/}
-                            {/*>add*/}
-                            {/*</button>*/}
                         </td>
                         <td>
                             <p>{pr.price * pr.cnt} $</p>
@@ -67,7 +67,14 @@ function App() {
 
                 </tbody>
             </table>
-            <h1>Shopping cart:</h1>
+
+            <h1>Shopping cart: {total}<br/>
+                <button
+                    onClick={finalSum}
+                >Final amount
+                </button>
+            </h1>
+
         </div>
     )
 }
