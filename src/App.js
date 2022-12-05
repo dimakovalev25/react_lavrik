@@ -1,23 +1,15 @@
 import './App.css';
 import {useState} from "react";
-import MinMax from "./components/MinMax";
-
+import MinMaxLazyRef from "./components/MinMaxLazyRef";
+import ProductCard from "./productCard/ProductCard";
 
 function App() {
 
     let [products, setProducts] = useState(productsStub());
-    let [total, setTotal] = useState(0);
-    console.log(total)
-
     let total = products.reduce((sum, pr) => sum + pr.price * pr.cnt, 0)
 
-    let finalSum = () => {
-        setTotal(products.map(item => item.cnt * item.price).reduce(
-            (a, b) => a + b, 0))
-    }
-
     let setCnt = (id, cnt) => {
-        setProducts(products.map(pr => pr.id != id ? pr : ({...pr, cnt})));
+        setProducts(products.map(pr => pr.id !== id ? pr : ({...pr, cnt})));
     }
 
     let delProduct = (id) => {
@@ -25,7 +17,7 @@ function App() {
     }
 
     return (
-        <div className="App">
+        <div className="App container-mt-1">
             <h1>Products list:</h1>
             <table>
                 <tbody>
@@ -45,7 +37,7 @@ function App() {
                         <td>{pr.title}</td>
                         <td>{pr.price} $</td>
                         <td>
-                            <MinMax
+                            <MinMaxLazyRef
                                 current={pr.cnt}
                                 max={pr.rest}
                                 onChange={cnt => setCnt(pr.id, cnt)}
@@ -53,6 +45,7 @@ function App() {
                         </td>
                         <td>
                             <button
+                                className={'btn btn-warning'}
                                 onClick={cnt => delProduct(pr.id)}
                             >del
                             </button>
@@ -69,11 +62,8 @@ function App() {
             </table>
 
             <h1>Shopping cart: {total}<br/>
-                <button
-                    onClick={finalSum}
-                >Final amount
-                </button>
             </h1>
+            <ProductCard/>
 
         </div>
     )
@@ -86,21 +76,21 @@ function productsStub() {
             id: 100,
             title: 'Iphone X',
             price: 1200,
-            rest: 20,
+            rest: 120,
             cnt: 0,
         },
         {
             id: 101,
             title: 'Iphone 11',
             price: 1000,
-            rest: 3,
+            rest: 93,
             cnt: 0,
         },
         {
             id: 102,
             title: 'Iphone 12',
             price: 1200,
-            rest: 13,
+            rest: 53,
             cnt: 0,
         },
         {
