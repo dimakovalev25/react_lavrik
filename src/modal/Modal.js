@@ -1,6 +1,5 @@
-import React, {useRef} from "react";
+import React from "react";
 import './Modal.css'
-import useClickOutside from "../hooks/UseClickOutside";
 
 const Modal = (props) => {
 

@@ -1,7 +1,8 @@
 import './App.css';
 import {useState} from "react";
 import MinMaxLazyRef from "./components/MinMaxLazyRef";
-import Modal from "./modal/Modal";
+// import Modal from "./modal/Modal";
+import ModalBootstrap from "./modalBootstrap/ModalBootstrap";
 
 function App() {
 
@@ -21,17 +22,18 @@ function App() {
     return (
         <div
             className="App container-mt-1">
-            <hr/>
-            <button
-                onClick={() => setShow(!show)}
-            >Show modal</button>
-                <Modal
-                    onClose={() => setShow(false)}
-                    show={show}>
+            {/*<hr/>*/}
+            {/*<button*/}
+            {/*    onClick={() => setShow(!show)}*/}
+            {/*>Show modal</button>*/}
+            {/*    <Modal*/}
+            {/*        onClose={() => setShow(false)}*/}
+            {/*        show={show}>*/}
 
-                    <h1>use props.Children</h1>
-                </Modal>
-            <hr/>
+            {/*        <h1>use props.Children</h1>*/}
+            {/*    </Modal>*/}
+
+            <ModalBootstrap/>
 
 
             <h1>Products list:</h1>
