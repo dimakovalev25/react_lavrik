@@ -3,11 +3,9 @@ import {useState} from "react";
 import MinMaxLazyRef from "./components/MinMaxLazyRef";
 import Modal from "./modal/Modal";
 
-
 function App() {
 
     const [show, setShow] = useState(false);
-
 
     let [products, setProducts] = useState(productsStub());
     let total = products.reduce((sum, pr) => sum + pr.price * pr.cnt, 0)
@@ -29,8 +27,12 @@ function App() {
             >Show modal</button>
                 <Modal
                     onClose={() => setShow(false)}
-                    show={show}/>
+                    show={show}>
+
+                    <h1>use props.Children</h1>
+                </Modal>
             <hr/>
+
 
             <h1>Products list:</h1>
             <table>

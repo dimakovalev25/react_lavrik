@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useRef} from "react";
 import './Modal.css'
+import useClickOutside from "../hooks/UseClickOutside";
 
 const Modal = (props) => {
 
@@ -9,11 +10,11 @@ const Modal = (props) => {
 
     return (
         <div
-            // onClick={props.onClose}
-            className='mod'>
+            onClick={props.onClose}
+            className='mod'
+        >
             <div
-                // onClick={e => e.stopPropagation()}
-                // onClick={event => console.log(event)}
+                onClick={e => e.stopPropagation()}
                 className='mod-content'>
                 <div className='mod-header'>
                     <h4 className='mod-title'>Modal window</h4>
@@ -24,6 +25,7 @@ const Modal = (props) => {
                         onClick={props.onClose}
                         className='button'>Close</button>
                 </div>
+                {props.children}
             </div>
         </div>
     )
