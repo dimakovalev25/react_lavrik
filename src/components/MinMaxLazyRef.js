@@ -44,7 +44,7 @@ function MinMaxLazyRef({min = 0, max, current, onChange}) {
             </button>
 
             <input
-                onClick={'inp'}
+                onClick={inc}
                 ref={inp}
                 defaultValue={current}
                 className={'input'}
