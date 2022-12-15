@@ -1,8 +1,10 @@
 import './App.css';
 import {useState} from "react";
 import MinMaxLazyRef from "./components/MinMaxLazyRef";
-// import Modal from "./modal/Modal";
+import Modal from "./modal/Modal";
 import ModalBootstrap from "./modalBootstrap/ModalBootstrap";
+import CounterClass from "./components/CounterClass";
+import CounterFunc from "./components/CounterFunc";
 
 function App() {
 
@@ -22,16 +24,19 @@ function App() {
     return (
         <div
             className="App container-mt-1">
-            {/*<hr/>*/}
-            {/*<button*/}
-            {/*    onClick={() => setShow(!show)}*/}
-            {/*>Show modal</button>*/}
-            {/*    <Modal*/}
-            {/*        onClose={() => setShow(false)}*/}
-            {/*        show={show}>*/}
+            {/*<CounterClass/>*/}
+            <CounterFunc min={0} max={5}/>
+            <CounterFunc min={0} max={3}/>
+            <hr/>
+            <button
+                onClick={() => setShow(!show)}
+            >Show modal</button>
+                <Modal
+                    onClose={() => setShow(false)}
+                    show={show}>
 
-            {/*        <h1>use props.Children</h1>*/}
-            {/*    </Modal>*/}
+                    <h1>use props.Children</h1>
+                </Modal>
 
             <ModalBootstrap/>
 
