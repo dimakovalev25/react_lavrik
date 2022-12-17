@@ -1,96 +1,92 @@
 import './App.css';
-import {useState} from "react";
-import MinMaxLazyRef from "./components/MinMaxLazyRef";
-import Modal from "./modal/Modal";
-import ModalBootstrap from "./modalBootstrap/ModalBootstrap";
-import CounterClass from "./components/CounterClass";
-import CounterFunc from "./components/CounterFunc";
+import {useState, useEffect} from "react";
+import MinMaxLazy from "./components/MinMaxLazy";
+import Modal from "./Modal";
 
 function App() {
 
-    const [show, setShow] = useState(false);
-
     let [products, setProducts] = useState(productsStub());
-    let total = products.reduce((sum, pr) => sum + pr.price * pr.cnt, 0)
+    let [showDetails, setShowDetails] = useState(false);
+
+    let total = products.reduce((sum, pr) => sum + (pr.price * pr.cnt), 0)
 
     let setCnt = (id, cnt) => {
-        setProducts(products.map(pr => pr.id !== id ? pr : ({...pr, cnt})));
+        setProducts(
+            products.map(pr => pr.id !== id ? pr : ({...pr, cnt}))
+        )
     }
 
-    let delProduct = (id) => {
-        setProducts(products.filter(item => item.id !== id));
+    const deleteProduct = (id) => {
+        setProducts(
+            products.filter(pr => pr.id !== id)
+        )
     }
 
     return (
         <div
             className="App container-mt-1">
-            {/*<CounterClass/>*/}
-            <CounterFunc min={0} max={5}/>
-            <CounterFunc min={0} max={3}/>
+            <h3>Products list:</h3>
             <hr/>
-            <button
-                onClick={() => setShow(!show)}
-            >Show modal</button>
-                <Modal
-                    onClose={() => setShow(false)}
-                    show={show}>
-
-                    <h1>use props.Children</h1>
-                </Modal>
-
-            <ModalBootstrap/>
-
-
-            <h1>Products list:</h1>
             <table>
                 <tbody>
                 <tr>
                     <th>Number:</th>
                     <th>Title:</th>
                     <th>Price USD:</th>
-                    <th>Counter:</th>
-                    <th></th>
+                    <th>Cnt:</th>
                     <th></th>
                     <th>Total USD:</th>
+                    <th></th>
                 </tr>
 
-                {products.map((pr, i) => (
+                {products.map((pr, index) => (
                     <tr key={pr.id}>
-                        <td>{i + 1}</td>
+                        <td>{index + 1}</td>
                         <td>{pr.title}</td>
-                        <td>{pr.price} $</td>
+                        <td>{pr.price}</td>
                         <td>
-                            <MinMaxLazyRef
+                            <MinMaxLazy
                                 current={pr.cnt}
-                                max={pr.rest}
                                 onChange={cnt => setCnt(pr.id, cnt)}
-                            />
+                                max={pr.rest}/>
                         </td>
+                        <td></td>
+                        <td>{pr.cnt * pr.price}</td>
                         <td>
                             <button
-                                className={'btn btn-warning'}
-                                onClick={cnt => delProduct(pr.id)}
-                            >del
+                                className={'btn btn-danger'}
+                                onClick={() => deleteProduct(pr.id)}
+                            >Delete
                             </button>
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                            <p>{pr.price * pr.cnt} $</p>
                         </td>
                     </tr>
                 ))}
-
                 </tbody>
             </table>
+            <hr/>
+            <h4
+                onClick={() => setShowDetails(true)}
+            >Total: {total} $
+            </h4>
+            <br/>
 
-            <h1>Shopping cart: {total}<br/>
-            </h1>
-            {/*<ProductCard/>*/}
+            <Modal
+                showed={showDetails}
+                title={`${products.length} positions in list`}
+                onClose={() => setShowDetails(false)}
+            >
+                <hr/>
+                <h4
+                    onClick={() => setShowDetails(true)}
+                >Total: {total} $
+                </h4>
+                <br/>
+            </Modal>
+
+            <hr/>
         </div>
     )
 }
-
 
 function productsStub() {
     return [
@@ -98,8 +94,8 @@ function productsStub() {
             id: 100,
             title: 'Iphone X',
             price: 1200,
-            rest: 120,
-            cnt: 0,
+            rest: 300,
+            cnt: 10,
         },
         {
             id: 101,
@@ -135,3 +131,13 @@ function productsStub() {
 }
 
 export default App;
+
+
+// function fn(i, ev) {
+//
+// }
+// let elem = document.querySelector('some...');
+// elem.forEach((el,i)=> {
+//     el.addEventListener('click', e => fn(i, e));
+// });
+//

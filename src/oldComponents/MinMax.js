@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './MinMax.css'
+import './MinMaxLazy.css'
 
 MinMax.propTypes = {
     min: PropTypes.number,
@@ -9,6 +9,8 @@ MinMax.propTypes = {
 }
 
 function MinMax({min = 0, max, current, onChange}) {
+
+    // console.log(current)
 
     function applyCurrent(num) {
         let validNum = Math.max(min, Math.min(max, num));
@@ -25,7 +27,7 @@ function MinMax({min = 0, max, current, onChange}) {
 
     return (
         <div className="Counter">
-
+            {/*<span>{current}</span> <br/>*/}
             <button
                 onClick={inc}
                 type={'button'}>+
