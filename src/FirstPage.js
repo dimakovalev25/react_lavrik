@@ -145,7 +145,7 @@ function productsStub() {
             title: 'Iphone X',
             price: 1200,
             rest: 300,
-            cnt: 10,
+            cnt: 0,
         },
         {
             id: 101,
