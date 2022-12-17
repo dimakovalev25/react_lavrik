@@ -1,4 +1,4 @@
-import './App.css';
+import './FirstPage.css';
 import {useState} from "react";
 import MinMaxLazyRef from "./components/MinMaxLazyRef";
 import Modal from "./modal/Modal";
@@ -6,7 +6,7 @@ import ModalBootstrap from "./modalBootstrap/ModalBootstrap";
 import CounterClass from "./components/CounterClass";
 import CounterFunc from "./components/MaxMin";
 
-function App() {
+function FirstPage() {
 
     const [show, setShow] = useState(false);
 

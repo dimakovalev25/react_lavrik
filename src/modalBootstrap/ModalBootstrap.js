@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ModalBootstrap() {
+function ModalBootstrap({total, children}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -11,14 +11,16 @@ function ModalBootstrap() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
+               Open Shop List
             </Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Shop List</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+
+                {children}
+                <Modal.Body>Total: {total} $</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close

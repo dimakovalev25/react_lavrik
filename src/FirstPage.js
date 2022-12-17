@@ -3,7 +3,7 @@ import {useState} from "react";
 import MinMaxLazy from "./components/MinMaxLazy";
 import BModal from 'react-bootstrap/Modal'
 
-function App() {
+function FirstPage() {
 
     let [products, setProducts] = useState(productsStub());
     let [showDetails, setShowDetails] = useState(false);
@@ -180,4 +180,14 @@ function productsStub() {
 
 }
 
-export default App;
+export default FirstPage;
+
+
+// function fn(i, ev) {
+//
+// }
+// let elem = document.querySelector('some...');
+// elem.forEach((el,i)=> {
+//     el.addEventListener('click', e => fn(i, e));
+// });
+//
